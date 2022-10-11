@@ -100,6 +100,13 @@
                 "description": "Resource ID of the 'Proximity Placement Group' or empty if none"
             }
         },
+        "avsId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Resource ID of the 'Availability Set' or empty if none"
+            }
+        },
         "tagsByResource": {
             "type": "object",
             "defaultValue": {},
@@ -246,7 +253,8 @@
                         }
                     }
                 },
-                "proximityPlacementGroup": "[if(empty(parameters('ppgId')), json('null'), json(concat('{\"id\": \"', parameters('ppgId'), '\"}')))]"
+                "proximityPlacementGroup": "[if(empty(parameters('ppgId')), json('null'), json(concat('{\"id\": \"', parameters('ppgId'), '\"}')))]",
+                "availabilitySet": "[if(empty(parameters('avsId')), json('null'), json(concat('{\"id\": \"', parameters('avsId'), '\"}')))]"
             }
         }
     ],

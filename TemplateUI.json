@@ -398,6 +398,33 @@
                                         "validationMessage": "Enter full resource id. Must not be empty."
                                     },
                                     "visible": "[steps('network').AdvancedSection.ppgEnable]"
+                                },                                {
+                                    "name": "avsEnable",
+                                    "type": "Microsoft.Common.CheckBox",
+                                    "label": "Specify an Availability Set",
+                                    "toolTip": "[Optional] Advanced option to specify an Availability Set"
+                                },
+                                {
+                                    "name": "avsWarning",
+                                    "type": "Microsoft.Common.InfoBox",
+                                    "visible": "[steps('network').AdvancedSection.avsEnable]",
+                                    "options": {
+                                        "icon": "Warning",
+                                        "text": "Enter the complete 'Availability Set' resource ID. An invalid resource ID will cause the deployment to fail."
+                                    }
+                                },
+                                {
+                                    "name": "avsTextBox",
+                                    "type": "Microsoft.Common.TextBox",
+                                    "label": "Availability Set Resource ID",
+                                    "defaultValue": "",
+                                    "toolTip": "WARNING: an invalid 'Availability Set' Resource ID will cause the deployment to fail",
+                                    "constraints": {
+                                        "required": true,
+                                        "regex": "^[a-z0-9A-Z._/-]{60,250}$",
+                                        "validationMessage": "Enter full resource id. Must not be empty."
+                                    },
+                                    "visible": "[steps('network').AdvancedSection.avsEnable]"
                                 }
                             ]
                         }
@@ -420,6 +447,7 @@
                 "version": "[if(equals(steps('basics').versionDropDown, 'manual'), steps('basics').VersionTextBox, steps('basics').versionDropDown)]",
                 "swxtchSize": "[steps('basics').swxtchSize]",
                 "ppgId": "[if(steps('network').AdvancedSection.ppgEnable, steps('network').AdvancedSection.ppgTextBox, '')]",
+                "avsId": "[if(steps('network').AdvancedSection.avsEnable, steps('network').AdvancedSection.avsTextBox, '')]",
                 "tagsByResource": "[steps('basics').TagsSection.Tags]",
                 "adminName": "[steps('basics').adminName]",
                 "sshPublicKey": "[ if(contains(steps('basics').credentials.authenticationType, 'sshPublicKey'), steps('basics').credentials.sshPublicKey, '' )]",
