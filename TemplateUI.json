@@ -74,6 +74,18 @@
                             }
                         },
                         {
+                            "name": "availabilityZones",
+                            "type": "array",
+                            "defaultValue": [
+                                "1",
+                                "2",
+                                "3"
+                              ],
+                              "metadata": {
+                                "description": "Zone numbers e.g. 1,2,3."
+                              }
+                        },
+                        {
                             "name": "switchName",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Switch Name",
