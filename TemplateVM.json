@@ -107,6 +107,18 @@
                 "description": "Resource ID of the 'Availability Set' or empty if none"
             }
         },
+        "avzone": {
+            "type": "string",
+            "defaultValue": "1",
+            "allowedValues": [
+                "1",
+                "2",
+                "3"
+            ],
+            "metadata": {
+                "description": "Zone number for the virtual machine"
+            }
+        },
         "tagsByResource": {
             "type": "object",
             "defaultValue": {},
@@ -199,6 +211,9 @@
                 "product": "[variables('imageOffer')]",
                 "name": "[parameters('imageSKU')]"
             },
+            "zones": [
+                "[parameters('avzone')]"
+              ],
             "properties": {
                 "hardwareProfile": {
                     "vmSize": "[variables('vmSize')]"

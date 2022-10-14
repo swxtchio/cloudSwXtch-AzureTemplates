@@ -398,7 +398,8 @@
                                         "validationMessage": "Enter full resource id. Must not be empty."
                                     },
                                     "visible": "[steps('network').AdvancedSection.ppgEnable]"
-                                },                                {
+                                },
+                                {
                                     "name": "avsEnable",
                                     "type": "Microsoft.Common.CheckBox",
                                     "label": "Specify an Availability Set",
@@ -425,6 +426,32 @@
                                         "validationMessage": "Enter full resource id. Must not be empty."
                                     },
                                     "visible": "[steps('network').AdvancedSection.avsEnable]"
+                                },
+                                {
+                                    "name": "avzone",
+                                    "type": "Microsoft.Common.DropDown",
+                                    "label": "Availability zone",
+                                    "placeholder": "",
+                                    "defaultValue": "1",
+                                    "toolTip": "Choose the VM deployment zone",
+                                    "constraints": {
+                                        "allowedValues": [
+                                            {
+                                                "label": "1",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "label": "2",
+                                                "value": "2"
+                                            },
+                                            {
+                                                "label": "3",
+                                                "value": "3"
+                                            }
+                                        ],
+                                        "required": true
+                                    },
+                                    "visible": true
                                 }
                             ]
                         }
@@ -448,6 +475,7 @@
                 "swxtchSize": "[steps('basics').swxtchSize]",
                 "ppgId": "[if(steps('network').AdvancedSection.ppgEnable, steps('network').AdvancedSection.ppgTextBox, '')]",
                 "avsId": "[if(steps('network').AdvancedSection.avsEnable, steps('network').AdvancedSection.avsTextBox, '')]",
+                "avzone": "[steps('network').AdvancedSection.avzone]",
                 "tagsByResource": "[steps('basics').TagsSection.Tags]",
                 "adminName": "[steps('basics').adminName]",
                 "sshPublicKey": "[ if(contains(steps('basics').credentials.authenticationType, 'sshPublicKey'), steps('basics').credentials.sshPublicKey, '' )]",
