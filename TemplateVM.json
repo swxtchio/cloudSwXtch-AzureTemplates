@@ -137,7 +137,7 @@
         "subnetCtrlId": "[resourceId(parameters('virtualNetworkRGName'),'Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworkName'), parameters('subnetCtrlName'))]",
         "subnetDataId": "[resourceId(parameters('virtualNetworkRGName'),'Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworkName'), parameters('subnetDataName'))]",
         "imagePublisher": "swxtchiollc1614108926893",
-        "imageOffer": "cloudswxtch-vm-001-preview"
+        "imageOffer": "cloudswxtch-vm-001"
     },
     "resources": [
         {
