@@ -132,24 +132,25 @@
                 "description": "Admin user name of the VM used for the cloudSwXtch"
             }
         },
-        "sshPublicKey": {
-            "type": "string",
-            "defaultValue": "",
+        "credentials": {
+            "type": "object",
+            "defaultValue": {},
             "metadata": {
-                "description": "SSH public key"
+                "description": "Credentials structure"
             }
         }
     },
     "variables": {
         "svcBaseName": "[concat(parameters('swxtchName'), '_vm')]",
-        "svcNic0Name": "[concat(variables('svcBaseName'), '_nic0')]",
-        "svcNic1Name": "[concat(variables('svcBaseName'), '_nic1')]",
-        "svcDiskName": "[concat(variables('svcBaseName'), '_osdisk')]",
+        "svcNic0Name": "[concat(parameters('swxtchName'), '_nic0')]",
+        "svcNic1Name": "[concat(parameters('swxtchName'), '_nic1')]",
+        "svcDiskName": "[concat(parameters('swxtchName'), '_osdisk')]",
         "vmSize": "[parameters('swxtchSize')]",
         "subnetCtrlId": "[resourceId(parameters('virtualNetworkRGName'),'Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworkName'), parameters('subnetCtrlName'))]",
         "subnetDataId": "[resourceId(parameters('virtualNetworkRGName'),'Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworkName'), parameters('subnetDataName'))]",
         "imagePublisher": "swxtchiollc1614108926893",
-        "imageOffer": "cloudswxtch-vm-001"
+        "imageOffer": "cloudswxtch-vm-001",
+        "adminPublicKey": "[if(contains(parameters('credentials').authenticationType, 'sshPublicKey'), parameters('credentials').sshPublicKey, '' )]"
     },
     "resources": [
         {
@@ -262,7 +263,7 @@
                             "publicKeys": [
                                 {
                                     "path": "[concat('/home/', parameters('adminName'), '/.ssh/authorized_keys')]",
-                                    "keyData": "[parameters('sshPublicKey')]"
+                                    "keyData": "[variables('adminPublicKey')]"
                                 }
                             ]
                         }
@@ -288,7 +289,7 @@
         },
         "AdminPublicKey": {
             "type": "string",
-            "value": "[parameters('sshPublicKey')]"
+            "value": "[variables('adminPublicKey')]"
         },
         "CtrlIp": {
             "type": "string",
