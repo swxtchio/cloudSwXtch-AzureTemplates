@@ -14,7 +14,7 @@ This proceedure will install the template into a resource group in your Azure su
 ```
 rg="<your-rg-here>"
 git clone https://github.com/swxtchio/swx-cloudSwXtch-AzureTemplates
-cd swx-loudSwXtch-AzureTemplates
+cd swx-cloudSwXtch-AzureTemplates
 az ts create -n cloudSwxtch-from-mp-image -g $rg -v 1 -f MPTemplateVM.json --ui-form-definition MPTemplateUI.json
 ```
 
