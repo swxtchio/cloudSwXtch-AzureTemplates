@@ -31,7 +31,7 @@
                                     "type": "Microsoft.Common.DropDown",
                                     "label": "Choose a cloudSwXtch plan:",
                                     "placeholder": "",
-                                    "defaultValue": "Small",
+                                    "defaultValue": "byol",
                                     "toolTip": "",
                                     "multiselect": false,
                                     "selectAll": false,
@@ -42,19 +42,14 @@
                                     "constraints": {
                                         "allowedValues": [
                                             {
-                                                "label": "Small",
-                                                "description": "up to 10 endpoints and 2Gbps egress",
-                                                "value": "small"
+                                                "label": "byol",
+                                                "description": "Needs a license file to work",
+                                                "value": "byol"
                                             },
                                             {
-                                                "label": "Medium",
-                                                "description": "up to 50 endpoints and 30Gbps egress",
-                                                "value": "medium"
-                                            },
-                                            {
-                                                "label": "Large",
-                                                "description": "up to 200 endpoints and 96Gbps egress",
-                                                "value": "large"
+                                                "label": "payg",
+                                                "description": "Hourly charge while VM is running",
+                                                "value": "payg"
                                             }
                                         ],
                                         "required": true
@@ -91,33 +86,21 @@
                             "label": "Swxtch Size",
                             "toolTip": "Size of the switch VM instance",
                             "recommendedSizes": [
-                                "Standard_D4s_v4",
-                                "Standard_D8s_v4",
-                                "Standard_D16s_v4",
-                                "Standard_D32s_v4",
-                                "Standard_D48s_v4",
-                                "Standard_D64s_v4"
+                                "Standard_D4s_v5",
+                                "Standard_D8s_v5",
+                                "Standard_D16s_v5",
+                                "Standard_D32s_v5",
+                                "Standard_D48s_v5",
+                                "Standard_D64s_v5"
                             ],
                             "constraints": {
                                 "allowedSizes": [
-                                    "Standard_D4_v3",
-                                    "Standard_D8_v3",
-                                    "Standard_D16_v3",
-                                    "Standard_D32_v3",
-                                    "Standard_D48_v3",
-                                    "Standard_D64_v3",
                                     "Standard_D4_v4",
                                     "Standard_D8_v4",
                                     "Standard_D16_v4",
                                     "Standard_D32_v4",
                                     "Standard_D48_v4",
                                     "Standard_D64_v4",
-                                    "Standard_D4s_v3",
-                                    "Standard_D8s_v3",
-                                    "Standard_D16s_v3",
-                                    "Standard_D32s_v3",
-                                    "Standard_D48s_v3",
-                                    "Standard_D64s_v3",
                                     "Standard_D4s_v4",
                                     "Standard_D8s_v4",
                                     "Standard_D16s_v4",
@@ -448,7 +431,7 @@
                 "avsId": "[if(steps('network').AdvancedSection.avsEnable, steps('network').AdvancedSection.avsTextBox, '')]",
                 "avzone": "[steps('network').AdvancedSection.avzone]",
                 "tagsByResource": "[steps('basics').TagsSection.Tags]",
-                "imageSKU": "[if(equals(steps('basics').planSection.plan, 'small'), 'swxtch-small-002', if(equals(steps('basics').planSection.plan, 'medium'), 'swxtch-medium-001', if(equals(steps('basics').planSection.plan, 'large'), 'swxtch-large-001', if(equals(steps('basics').planSection.plan, 'iex'), 'swxtch-iex-001', 'invalid'))))]",
+                "imageSKU": "[if(equals(steps('basics').planSection.plan, 'byol'), 'byol-001', if(equals(steps('basics').planSection.plan, 'payg'), 'swx-poc-001', 'invalid') )]",
                 "adminName": "[steps('basics').adminName]",
                 "credentials": "[steps('basics').credentials]"
             },
